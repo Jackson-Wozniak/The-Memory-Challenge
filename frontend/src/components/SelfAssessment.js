@@ -9,7 +9,7 @@ function SelfAssessment(props) {
             <h1>Before We Begin...</h1>
             <hr />
             <form onSubmit={(e) => props.setSelfAssessmentGrade(chosenGrade)} className="self-assessment">
-                <h3>How would you grade your {props.memoryCategory} memory?</h3>
+                <h3>How would you grade your own {props.memoryCategory} memory?</h3>
                 <div>
                     <input type="radio" name="grade" value="verybad" id="very-bad" onChange={(e) => setChosenGrade(e.target.value)}/>
                     <label className="choose-grade-label" htmlFor="very-bad">Very Bad</label>

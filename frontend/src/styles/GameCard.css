@@ -8,6 +8,11 @@
     margin : 10px;
     border: 1px solid black;
     border-radius: 10px;
+    text-decoration: none;
+}
+
+.game-card:hover {
+    color : blue;
 }
 
 .game-card hr {

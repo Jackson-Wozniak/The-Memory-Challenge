@@ -1,12 +1,12 @@
 import {getAllCurrentGames} from '../classes/Games.js'
-import GameCard from '../components/GameCard.js' 
+import GameCard from './GameCard.js' 
 
 function HomePage() {
     const games = getAllCurrentGames();
     return ( 
         <div className="home-page">
             {games.map(game => (
-                <GameCard description={game.description} name={game.name} />
+                <GameCard description={game.description} name={game.name} path={game.path}/>
             ))}
         </div>
     );
