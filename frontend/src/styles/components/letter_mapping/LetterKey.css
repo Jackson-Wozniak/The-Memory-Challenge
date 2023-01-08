@@ -1,0 +1,27 @@
+.letter-mapping {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.number-to-letter-div {
+    border: 1px solid black;
+    margin : 10px;
+    height : auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.number-to-letter-div .numbers{
+
+}
+
+.number-to-letter-div .letters {
+    display: flex;
+    border : none;
+}

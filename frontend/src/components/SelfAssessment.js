@@ -1,4 +1,4 @@
-import '../styles/SelfAssessment.css'
+import '../styles/components/SelfAssessment.css'
 import { useState } from 'react';
 
 function SelfAssessment(props) {

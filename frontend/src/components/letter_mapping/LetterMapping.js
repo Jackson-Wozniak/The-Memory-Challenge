@@ -1,10 +1,12 @@
 import { useState } from "react";
-import '../../styles/LetterMapping.css'
+import '../../styles/components/letter_mapping/LetterMapping.css'
 import SelfAssessment from "../SelfAssessment";
 import LetterDisplay from "./LetterDisplay";
+import LetterMappingGame from "./LetterMappingGame";
 
 function LetterMapping() {
     const [selfAssessmentGrade, setSelfAssessmentGrade] = useState(null);
+    const [gameValidated, setGameValidated] = useState(false);
 
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let lettersMapped = [];
@@ -28,14 +30,27 @@ function LetterMapping() {
     if(selfAssessmentGrade == null){
         gameWindow = <SelfAssessment setSelfAssessmentGrade={setSelfAssessmentGrade} memoryCategory="visual"/>;
     }else{
-        gameWindow = <LetterDisplay map={letterMap} lettersMapped={lettersMapped}/>;
+        gameWindow = <LetterDisplay 
+                        map={letterMap} 
+                        lettersMapped={lettersMapped} 
+                        setGameValidated={setGameValidated} 
+                        gameAlreadyValidated={false}
+                    />;
     }
 
-    return(
-        <div className="letter-mapping">
-            {gameWindow}
-        </div>
-    );
+    if(gameValidated){
+        return(
+            <div className="letter-mapping">
+                <LetterMappingGame map={letterMap} lettersMapped={lettersMapped} mappingKey={gameWindow}/>
+            </div>
+        );
+    }else{
+        return(
+            <div className="letter-mapping">
+                {gameWindow}
+            </div>
+        );
+    }
 }
 
 export default LetterMapping;
