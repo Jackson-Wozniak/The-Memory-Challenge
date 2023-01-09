@@ -1,0 +1,70 @@
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+}
+
+.letter-mapping-game {
+    position: absolute;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    color : var(--darkest);
+    min-width : 80%;
+    min-height : 80%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border : 1px solid black;
+}
+
+.letter-mapping-game .filler {
+    border : none;
+    height : 0px;
+    width: 0px;
+    visibility: hidden;
+    margin : 0px;
+    padding : 0px;
+}
+
+.letter-mapping-game .key {
+    min-height : 80vh;
+    border : none;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#buttons {
+    display: flex;
+    border : none;
+}
+
+#buttons button{
+    margin : 10px;
+    padding : 5px;
+    font-weight: bold;
+    font-size: larger;
+    height : 40px;
+    width : 40px;
+    border : none;
+    border-radius: 10px;
+    background-color: var(--darker);
+    color : var(--light);
+    transition: 1s;
+}
+
+#buttons button:hover {
+    width : 42px;
+    height : 42px;
+    background-color: var(--darkest);
+}

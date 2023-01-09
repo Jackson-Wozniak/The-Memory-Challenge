@@ -1,4 +1,4 @@
-import '../../styles/components/letter_mapping/LetterKey.css';
+import '../../styles/components/letter_mapping/LetterDisplay.css';
 import LetterMappingGame from './LetterMappingGame';
 
 function LetterDisplay(props) {

@@ -1,13 +1,15 @@
-.letter-mapping {
+.letters-key {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.number-to-letter-div {
-    border: 1px solid black;
-    margin : 10px;
+.letters-key .div {
+    margin : 5px;
+    padding : 5px;
+    min-width: 90%;
     height : auto;
     display: flex;
     flex-direction: column;
@@ -15,13 +17,26 @@
     align-items: center;
     text-align: center;
     font-weight: bold;
+    border : 1px solid black;
 }
 
-.number-to-letter-div .numbers{
-
+.letters-key hr {
+    width : 90%;
+    color : white;
+    background-color: white;
 }
 
-.number-to-letter-div .letters {
+.letters-key .letters {
+    margin : 0px;
+    padding : 0px;
     display: flex;
     border : none;
+}
+
+.letters-key .letters h1 {
+    margin : 0px 10px 0px;
+}
+
+.letters-key .numbers {
+    margin : 5px;
 }

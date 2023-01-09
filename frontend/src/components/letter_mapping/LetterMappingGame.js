@@ -1,4 +1,7 @@
 import React from "react";
+import LetterKey from "./LetterKey";
+import '../../styles/components/letter_mapping/LetterMappingGame.css'
+import '../../styles/components/letter_mapping/LetterKey.css'
 
 class LetterMappingGame extends React.Component {
     /*
@@ -35,8 +38,9 @@ class LetterMappingGame extends React.Component {
         if(this.state.gameOver){
             return;
         }
+        //if key is currently visible, give 1 point, when hidden, user earns 2 points
         if(this.map.get(key).includes(this.state.currentChar)){
-            this.setState({points : this.state.points + 1});
+            this.setState({points : (this.state.showKey ? this.state.points + 1 : this.state.points + 2)});
         }
     }
 
@@ -96,22 +100,28 @@ class LetterMappingGame extends React.Component {
         let keyDiv;
         //when key is shown, fill the key div with data
         if(this.state.showKey){
-            keyDiv = this.props.mappingKey;
+            keyDiv = <LetterKey map={this.props.map}/>;
         }else{
-            keyDiv = <div></div>;
+            keyDiv = <div className="filler"></div>;
         }
 
         return (
             <div className="letter-mapping-game">
-                <input type="checkbox" onChange={(e) => this.setState({showKey : e.target.checked})} value="Hello"/>
-                {keyDiv}
-                <button onClick={this.startTimer}></button>
-                <h1>{this.state.points}</h1>
-                <h1>{this.state.currentChar}</h1>
-                <h3>{this.state.secondsRemaining > 0 ? this.state.secondsRemaining + " seconds left" : "Game Over!"}</h3>
-                <button onClick={(e) => this.handleButton(e)} value="1">1</button>
-                <button onClick={(e) => this.handleButton(e)} value="2">2</button>
-                <button onClick={(e) => this.handleButton(e)} value="3">3</button>
+                <div className="key">
+                    <input type="checkbox" onChange={(e) => this.setState({showKey : e.target.checked})} id="show-key"/>
+                    <label htmlFor="show-key">Show Key {"(1/2 points)"}</label>
+                    {keyDiv}
+                </div>
+                <div className="game-content">
+                    <h3>{this.state.secondsRemaining > 0 ? this.state.secondsRemaining + " seconds left" : "Game Over!"}</h3>
+                    <h1>{this.state.points + " "} points</h1>
+                    <h1>{this.state.currentChar}</h1>
+                    <div id="buttons">
+                        <button onClick={(e) => this.handleButton(e)} value="1">1</button>
+                        <button onClick={(e) => this.handleButton(e)} value="2">2</button>
+                        <button onClick={(e) => this.handleButton(e)} value="3">3</button>
+                    </div>
+                </div>
             </div>
     );
     }
