@@ -5,10 +5,13 @@ import com.api.memory_quizzes.entity.MemoryGame;
 import com.api.memory_quizzes.enums.SelfAssessmentGrade;
 import com.api.memory_quizzes.repository.GradeAverageRepository;
 import com.api.memory_quizzes.repository.MemoryGameRepository;
+import com.api.memory_quizzes.request.UpdateScoreRequest;
 import com.api.memory_quizzes.service.GameStatsService;
 import com.api.memory_quizzes.service.MemoryGameService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +33,10 @@ public class MemoryGameController {
     @RequestMapping
     public List<MemoryGame> getAllMemoryGames(){
         return memoryGameService.findAllGames();
+    }
+
+    @PostMapping(value = "/update")
+    public MemoryGame updateScoresForExistingGame(@RequestBody UpdateScoreRequest request){
+        return memoryGameService.updateScores(request);
     }
 }

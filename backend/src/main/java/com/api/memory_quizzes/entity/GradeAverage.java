@@ -2,6 +2,8 @@ package com.api.memory_quizzes.entity;
 
 import com.api.memory_quizzes.entity.idclass.GradeAverageId;
 import com.api.memory_quizzes.enums.SelfAssessmentGrade;
+import com.api.memory_quizzes.request.UpdateScoreRequest;
+import com.api.memory_quizzes.utils.Calculations;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,5 +43,21 @@ public class GradeAverage {
         this.selfAssessmentGrade = selfAssessmentGrade;
         this.totalAverage = 0.0;
         this.timesGraded = 0L;
+    }
+
+    private void incrementTimesGraded(){
+        this.setTimesGraded(this.timesGraded + 1);
+    }
+
+    public void recalculateAverageScoreAndTimesGraded(double newScore){
+        this.setTotalAverage(Calculations.calculateNewAverageScore(
+                this.totalAverage, this.timesGraded, newScore));
+        incrementTimesGraded();
+    }
+
+    public void recalculateAverageScoreAndTimesGraded(UpdateScoreRequest request){
+        this.setTotalAverage(Calculations.calculateNewAverageScore(
+                this.totalAverage, this.timesGraded, request.getFinalScore()));
+        incrementTimesGraded();
     }
 }
