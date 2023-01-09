@@ -32,7 +32,7 @@ class GameStatsServiceTest {
         List<GameStats> gameStats = gameStatsService.findAllStats();
         long totalLiked = gameStats.stream()
                 .map(GameStats::getTimesLiked)
-                        .reduce(0L, Long::sum);
+                .reduce(0L, Long::sum);
         assertEquals(totalLiked, gameStatsService.getTotalLikes());
     }
 }
