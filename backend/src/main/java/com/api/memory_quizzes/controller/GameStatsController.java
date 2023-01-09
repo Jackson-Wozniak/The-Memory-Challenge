@@ -1,6 +1,6 @@
 package com.api.memory_quizzes.controller;
 
-import com.api.memory_quizzes.service.GameStatsService;
+import com.api.memory_quizzes.repository.GameStatsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameStatsController {
 
     @Autowired
-    private final GameStatsService gameStatsService;
+    private final GameStatsRepository gameStatsRepository;
 
     @RequestMapping(value = "/total/liked")
     public long getTotalLikedGamesCount(){
-        return gameStatsService.getTotalLikes();
+        return gameStatsRepository.findTotalLiked().orElse(0L);
     }
 
     @RequestMapping(value = "/total/played")
     public long getTotalGamesPlayed(){
-        return gameStatsService.getTotalGamesPlayed();
+        return gameStatsRepository.findTotalLiked().orElse(0L);
     }
 }
