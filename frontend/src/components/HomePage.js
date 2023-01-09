@@ -1,5 +1,6 @@
 import {getAllCurrentGames} from '../classes/Games.js'
 import GameCard from './GameCard.js' 
+import '../styles/components/HomePage.css'
 
 function HomePage() {
     const games = getAllCurrentGames();

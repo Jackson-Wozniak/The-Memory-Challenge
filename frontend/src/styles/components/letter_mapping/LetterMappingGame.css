@@ -7,6 +7,12 @@
     --green: #3bd170;
 }
 
+.container {
+    min-width : 100vw;
+    min-height : 100vh;
+    background-color: var(--dark);
+}
+
 .letter-mapping-game {
     position: absolute;
     top : 50%;
@@ -20,6 +26,10 @@
     align-items: center;
     text-align: center;
     border : 1px solid black;
+    border-radius: 10px;
+    font-family: 'Century Gothic', sans-serif;
+    background-color: var(--darker);
+    color : var(--light);
 }
 
 .letter-mapping-game .filler {
@@ -33,7 +43,19 @@
 
 .letter-mapping-game .key {
     min-height : 80vh;
+    padding : 10px;
     border : none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-right : 30px;
+    width : 20%;
+}
+
+.key div {
+    margin-bottom: 10px;
 }
 
 .game-content {
@@ -42,6 +64,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    width : 80%;
 }
 
 #buttons {
@@ -58,13 +81,27 @@
     width : 40px;
     border : none;
     border-radius: 10px;
-    background-color: var(--darker);
+    background-color: var(--darkest);
     color : var(--light);
     transition: 1s;
+    font-family: 'Century Gothic', sans-serif;
 }
 
 #buttons button:hover {
     width : 42px;
     height : 42px;
     background-color: var(--darkest);
+}
+
+@media only screen and (max-width : 650px) {
+    .letter-mapping-game .game-content {
+        font-size: .8rem;
+        width : 70%;
+    }
+
+    .letter-mapping-game .key {
+        margin-right : 10px;
+        font-size: .6rem;
+        width : 30%;
+    }
 }

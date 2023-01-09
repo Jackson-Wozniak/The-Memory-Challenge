@@ -106,10 +106,13 @@ class LetterMappingGame extends React.Component {
         }
 
         return (
-            <div className="letter-mapping-game">
+            <div className="container">
+                <div className="letter-mapping-game">
                 <div className="key">
-                    <input type="checkbox" onChange={(e) => this.setState({showKey : e.target.checked})} id="show-key"/>
-                    <label htmlFor="show-key">Show Key {"(1/2 points)"}</label>
+                    <div>
+                        <input type="checkbox" onChange={(e) => this.setState({showKey : e.target.checked})} id="show-key"/>
+                        <label htmlFor="show-key">Show Key {"(1/2 points)"}</label>
+                    </div>
                     {keyDiv}
                 </div>
                 <div className="game-content">
@@ -122,6 +125,7 @@ class LetterMappingGame extends React.Component {
                         <button onClick={(e) => this.handleButton(e)} value="3">3</button>
                     </div>
                 </div>
+            </div>
             </div>
     );
     }

@@ -1,3 +1,12 @@
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+}
+
 .letters-key {
     display: flex;
     flex-direction: column;
@@ -17,13 +26,15 @@
     align-items: center;
     text-align: center;
     font-weight: bold;
-    border : 1px solid black;
+    font-family: 'Century Gothic', sans-serif;
+    background-color: var(--darkest);
+    border-radius: 10px;
 }
 
 .letters-key hr {
     width : 90%;
-    color : white;
-    background-color: white;
+    color : black;
+    background-color: black;
 }
 
 .letters-key .letters {
@@ -31,6 +42,10 @@
     padding : 0px;
     display: flex;
     border : none;
+}
+
+.div .letter {
+    font-weight: normal;
 }
 
 .letters-key .letters h1 {
