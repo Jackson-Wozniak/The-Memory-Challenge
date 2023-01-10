@@ -3,10 +3,6 @@ import LetterMappingGame from './LetterMappingGame';
 
 function LetterDisplay(props) {
     
-    let button;
-    if(!props.gameAlreadyValidated){
-        button = <button onClick={(e) => props.setGameValidated(true)}>I Understand</button>
-    }
     return (  
         <div className="letter-mapping">
             <div className="number-to-letter-div">
@@ -31,7 +27,7 @@ function LetterDisplay(props) {
                 <br />
                 <p>{props.map.get("3")[1]}</p>
             </div>
-            {button}
+            <button onClick={(e) => props.setGameValidated(true)}>I Understand</button>
         </div>
     );
 }

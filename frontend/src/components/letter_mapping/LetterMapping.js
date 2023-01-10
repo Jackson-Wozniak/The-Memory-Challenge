@@ -10,11 +10,16 @@ function LetterMapping() {
 
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let lettersMapped = [];
-    let letterMap = new Map([
-        ["1", assignRandomCharacters()],
-        ["2", assignRandomCharacters()],
-        ["3", assignRandomCharacters()],
-    ]);
+
+    const [letterMap, setLetterMap] = useState(setMap());
+
+    function setMap(){
+        return new Map([
+            ["1", assignRandomCharacters()],
+            ["2", assignRandomCharacters()],
+            ["3", assignRandomCharacters()],
+        ]);
+    };
     
     function assignRandomCharacters(){
         let assignedCharacters = [];

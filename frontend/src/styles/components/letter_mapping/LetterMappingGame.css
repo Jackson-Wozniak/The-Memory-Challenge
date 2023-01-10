@@ -65,20 +65,26 @@
     align-items: center;
     text-align: center;
     width : 80%;
+    font-size: 1.2rem;
+    text-shadow: 2px 1px var(--darkest);
+}
+
+.game-content #current-char {
+    font-size: 4rem;
+    color : aquamarine;
+    text-shadow: 2px 1px var(--darkest);
 }
 
 #buttons {
     display: flex;
-    border : none;
 }
 
 #buttons button{
     margin : 10px;
-    padding : 5px;
     font-weight: bold;
     font-size: larger;
-    height : 40px;
-    width : 40px;
+    height : 60px;
+    width : 60px;
     border : none;
     border-radius: 10px;
     background-color: var(--darkest);
@@ -93,15 +99,50 @@
     background-color: var(--darkest);
 }
 
+.key input[type=checkbox] {
+    display:none; 
+    margin:10px;
+}
+
+.key input[type=checkbox] + label {
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+    background-color: var(--darkest);
+    border-color: var(--light);
+    margin : 10px;
+    border-radius: 10px;
+    color : var(--light);
+}
+
+.key input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color:var(--green);
+}
+
 @media only screen and (max-width : 650px) {
+    .letter-mapping-game {
+        width : 90%;
+    }
+
     .letter-mapping-game .game-content {
-        font-size: .8rem;
-        width : 70%;
+        font-size: .6rem;
+        width : 75%;
+    }
+
+    .game-content #current-char {
+        font-size: 1.6rem;
     }
 
     .letter-mapping-game .key {
         margin-right : 10px;
         font-size: .6rem;
-        width : 30%;
+        width : 25%;
+    }
+
+    #buttons button {
+        margin : 5px;
+        height : 35px;
+        width : 35px;
     }
 }

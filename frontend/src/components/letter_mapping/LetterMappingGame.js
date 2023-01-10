@@ -21,8 +21,7 @@ class LetterMappingGame extends React.Component {
             showKey : false
         }
         this.lettersMapped = props.lettersMapped;
-        this.map = props.map;
-        //this.startTimer = this.startTimer.bind(this);
+        this.map = this.props.map;
     }
     
     componentDidMount() {
@@ -118,7 +117,7 @@ class LetterMappingGame extends React.Component {
                 <div className="game-content">
                     <h3>{this.state.secondsRemaining > 0 ? this.state.secondsRemaining + " seconds left" : "Game Over!"}</h3>
                     <h1>{this.state.points + " "} points</h1>
-                    <h1>{this.state.currentChar}</h1>
+                    <h1 id="current-char">{this.state.currentChar}</h1>
                     <div id="buttons">
                         <button onClick={(e) => this.handleButton(e)} value="1">1</button>
                         <button onClick={(e) => this.handleButton(e)} value="2">2</button>
