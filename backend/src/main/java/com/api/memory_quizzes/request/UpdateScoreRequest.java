@@ -2,6 +2,7 @@ package com.api.memory_quizzes.request;
 
 import com.api.memory_quizzes.enums.SelfAssessmentGrade;
 import com.api.memory_quizzes.utils.MapUrlNameToValidGame;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,27 +10,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UpdateScoreRequest {
 
-    @JsonProperty("nameOfGame")
+    @JsonAlias({"nameOfGame", "name"})
     private String nameOfGame;
 
-    @JsonProperty("grade")
+    @JsonAlias({"grade", "selfAssessmentGrade"})
     private String grade;
 
-    @JsonProperty("finalScore")
+    @JsonAlias({"finalScore", "score"})
     private double finalScore;
 
     private boolean liked;
 
-    public UpdateScoreRequest(
-            String name,
-            String grade,
-            double score,
-            boolean liked) {
-        this.nameOfGame = MapUrlNameToValidGame.mapToValidMemoryName(name);
-        this.grade = grade;
-        this.finalScore = score;
-        this.liked = liked;
+    public void setValidUrlName(){
+        this.nameOfGame = MapUrlNameToValidGame.mapToValidMemoryName(this.nameOfGame);
     }
 }

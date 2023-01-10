@@ -10,10 +10,7 @@ import com.api.memory_quizzes.service.GameStatsService;
 import com.api.memory_quizzes.service.MemoryGameService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,8 +32,9 @@ public class MemoryGameController {
         return memoryGameService.findAllGames();
     }
 
-    @PostMapping(value = "/update")
+    @PutMapping
     public MemoryGame updateScoresForExistingGame(@RequestBody UpdateScoreRequest request){
+        request.setValidUrlName();
         return memoryGameService.updateScores(request);
     }
 }
