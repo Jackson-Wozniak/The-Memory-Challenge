@@ -1,4 +1,38 @@
-.letter-mapping {
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+}
+
+.letter-display {
+    width : 100vw;
+    min-height : 100vh;
+    background-color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color : var(--light);
+    text-shadow: 2px 1px var(--darker);
+}
+
+.explanation-div {
+    width : 60%;
+    font-family: 'Century Gothic', sans-serif;
+    color : var(--light);
+}
+
+.explanation-div h2 {
+    color : cornflowerblue;
+}
+
+.map-container {
+    width : 100%;
+    height : auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +41,9 @@
 
 .number-to-letter-div {
     border: 1px solid black;
+    border-radius: 10px;
     margin : 10px;
+    min-width : 20%;
     height : auto;
     display: flex;
     flex-direction: column;
@@ -15,4 +51,44 @@
     align-items: center;
     text-align: center;
     font-weight: bold;
+    font-family: 'Century Gothic', sans-serif;
+    background-color: var(--darkest);
+    border-radius: 10px;
+    color : var(--light);
+}
+
+.number-to-letter-div .numbers {
+    margin : 5px;
+}
+
+.number-to-letter-div .letters {
+    margin : 0px;
+    padding : 0px;
+    display: flex;
+    border : none;
+}
+
+.number-to-letter-div hr {
+    width : 90%;
+    border-radius: 5px;
+    color : var(--light);
+    background-color: var(--light);
+}
+
+.letter-display button {
+    margin-top : 10px;
+    border : none;
+    border-radius: 10px;
+    padding : 10px;
+    font-size: large;
+    font-weight: bold;
+    color : var(--green);
+    background-color: var(--darker);
+    font-family: 'Century Gothic', sans-serif;
+}
+
+@media only screen and (max-width : 500px){
+    .explanation-div {
+        width : 80%;
+    }
 }

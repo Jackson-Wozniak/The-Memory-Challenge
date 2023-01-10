@@ -9,8 +9,7 @@ function LetterMapping() {
     const [gameValidated, setGameValidated] = useState(false);
 
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let lettersMapped = [];
-
+    
     const [letterMap, setLetterMap] = useState(setMap());
 
     function setMap(){
@@ -26,7 +25,6 @@ function LetterMapping() {
         for(let i = 0; i < 2; i++){
             assignedCharacters.push(characters.charAt(Math.floor(Math.random() * characters.length)));
             characters = characters.replace(assignedCharacters[i], '');
-            lettersMapped.push(assignedCharacters[i]);
         }
         return assignedCharacters;
     }
@@ -36,8 +34,7 @@ function LetterMapping() {
         gameWindow = <SelfAssessment setSelfAssessmentGrade={setSelfAssessmentGrade} memoryCategory="visual"/>;
     }else{
         gameWindow = <LetterDisplay 
-                        map={letterMap} 
-                        lettersMapped={lettersMapped} 
+                        map={letterMap}  
                         setGameValidated={setGameValidated} 
                         gameAlreadyValidated={false}
                     />;
@@ -46,7 +43,7 @@ function LetterMapping() {
     if(gameValidated){
         return(
             <div className="letter-mapping">
-                <LetterMappingGame map={letterMap} lettersMapped={lettersMapped} mappingKey={gameWindow}/>
+                <LetterMappingGame map={letterMap} mappingKey={gameWindow}/>
             </div>
         );
     }else{

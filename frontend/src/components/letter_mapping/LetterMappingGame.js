@@ -11,17 +11,17 @@ class LetterMappingGame extends React.Component {
     */
     constructor(props){
         super(props);
+        this.map = this.props.map;
+        this.lettersMapped = this.findLettersMapped();
         this.state = {
             points : 0,
-            currentChar : props.lettersMapped[Math.floor(Math.random() * props.lettersMapped.length)],
+            currentChar : this.lettersMapped[Math.floor(Math.random() * this.lettersMapped.length)],
             secondsRemaining: 90,
             gameStarted : false,
             gameOver : false,
             onPause : false,
             showKey : false
         }
-        this.lettersMapped = props.lettersMapped;
-        this.map = this.props.map;
     }
     
     componentDidMount() {
@@ -31,6 +31,16 @@ class LetterMappingGame extends React.Component {
     
     componentWillUnmount() {
         window.removeEventListener('keyup', function(){});
+    }
+
+    findLettersMapped(){
+        let lettersMapped = [];
+        for(let i = 1; i <= 3; i++){
+            let values = this.map.get(i.toString());
+            lettersMapped.push(values[0]);
+            lettersMapped.push(values[1]);
+        }
+        return lettersMapped;
     }
 
     checkIfAnswerIsCorrect(key){
