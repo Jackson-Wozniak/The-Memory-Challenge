@@ -26,6 +26,13 @@
     justify-content: center;
     text-align: center;
     color : var(--light);
+    text-shadow: 2px 2px var(--darkest);
+    font-family: monospace, sans-serif;
+}
+
+.desc-per-grade p {
+    line-height: 1.8rem;
+    font-size: 1.2rem;
 }
 
 .desc-per-grade h2 {
