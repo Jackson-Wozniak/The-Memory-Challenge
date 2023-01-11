@@ -1,5 +1,6 @@
 import '../styles/components/SelfAssessment.css'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function SelfAssessment(props) {
     const [chosenGrade, setChosenGrade] = useState("average");
@@ -28,6 +29,7 @@ function SelfAssessment(props) {
                     
                 </div>
                 <button action="submit" className="submit-assessment">Start Memory Challenge</button>
+                <Link to="/grade-desc" target="_blank" className="to-grade-desc">Not sure how to grade yourself?</Link>
             </form>
         </div>
     );

@@ -1,0 +1,49 @@
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+}
+
+.grade-desc-container {
+    overflow: hidden;
+    width : 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--dark);
+}
+
+.desc-per-grade {
+    width : 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color : var(--light);
+}
+
+.desc-per-grade h2 {
+    width : 50%;
+    color : skyblue;
+    margin-top : 8px;
+    margin-bottom : 0px;
+}
+
+.desc-per-grade hr {
+    width : 50%;
+    height : 1px;
+    background-color: var(--light);
+    color : var(--light);
+    border-radius: 10px;
+}
+
+#grade-desc-note {
+    color : crimson;
+    width : 70%;
+}
