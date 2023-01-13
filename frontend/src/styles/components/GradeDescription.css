@@ -5,6 +5,7 @@
 	--purple: #8B5CF6;
 	--light: #EEE;
     --green: #3bd170;
+    --dark-background : #222222;
 }
 
 .grade-desc-container {
@@ -15,7 +16,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: var(--dark);
+    background-color: var(--dark-background);
 }
 
 .desc-per-grade {

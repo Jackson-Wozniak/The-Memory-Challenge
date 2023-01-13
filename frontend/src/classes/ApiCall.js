@@ -1,22 +1,25 @@
 class ApiCall {
-    nameOfGame;
-    finalScore;
-    selfAssessmentGrade;
+    name;
+    score;
+    grade;
     liked;
     
-    constructor(nameOfGame, finalScore, selfAssessmentGrade, liked){
-        this.nameOfGame = nameOfGame;
-        this.finalScore = finalScore;
-        this.selfAssessmentGrade = selfAssessmentGrade;
+    constructor(name, score, grade, liked){
+        this.name = name;
+        this.score = score;
+        this.grade = grade;
         this.liked = liked;
     }
 }
 
 export function callApiWithData(name, score, selfAssessmentGrade, liked){
     let apiCall = new ApiCall(name, score, selfAssessmentGrade, liked);
-    fetch("http://localhost:8080/api/v1/game/new-data", {
-        method : 'POST',
-        body : JSON.stringify(apiCall)
+    fetch("http://localhost:8080/api/v1/game", {
+        method : 'PUT',
+        headers : {
+            'Content-Type':'application/json'
+        },
+        body : JSON.stringify(apiCall),
     })
     .then(res => res.json())
     .then(data => console.log(data))

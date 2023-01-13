@@ -5,6 +5,8 @@
 	--purple: #8B5CF6;
 	--light: #EEE;
     --green: #3bd170;
+    --dark-background : #222222;
+    --light-backround : #666666;
 }
 
 .container {
@@ -30,6 +32,7 @@
     font-family: 'Century Gothic', sans-serif;
     background-color: var(--darker);
     color : var(--light);
+    box-shadow: var(--darkest) 0px 7px 29px 0px;
 }
 
 .letter-mapping-game .filler {
@@ -94,8 +97,8 @@
 }
 
 #buttons button:hover {
-    width : 42px;
-    height : 42px;
+    width : 62px;
+    height : 62px;
     background-color: var(--darkest);
 }
 
