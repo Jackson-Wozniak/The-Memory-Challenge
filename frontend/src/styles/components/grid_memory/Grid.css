@@ -1,11 +1,50 @@
-.correct {
-    background-color: green;
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+    --dark-background : #222222;
+    --light-backround : #666666;
 }
 
-.incorrect {
-    background-color: red;
+.grid-memory-grid {
+    width : 25vw;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
-.flash-buttons {
-    background-color: orange;
+.grid-memory-grid button {
+    width : 60px;
+    height : 60px;
+    background-color: #292f39;
+    border : none;
+    border-radius: 5px;
+    box-shadow: var(--darker) 0px 7px 29px 0px;
+}
+
+.grid-memory-grid .correct {
+    background-color: var(--light);
+}
+
+.grid-memory-grid .incorrect {
+    background-color: var(--darkest);
+}
+
+.grid-memory-grid .flash-buttons {
+    background-color: var(--light);
+}
+
+@media only screen and (max-width : 500px){
+    .grid-memory-grid button {
+        width : 40px;
+        height : 40px;
+    }
 }

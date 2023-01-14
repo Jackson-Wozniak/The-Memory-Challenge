@@ -1,8 +1,10 @@
+import '../../styles/components/grid_memory/GridLevelDisplay.css'
+
 function GridScoreDisplay(props) {
     return (  
-        <div>
-            <div>Level {props.level}</div>
-            <div>{props.incorrectGuesses}/10 incorrect</div>
+        <div className="grid-memory-level-display">
+            <h1>Level {props.level}</h1>
+            <p>{props.incorrectGuesses}/10 incorrect</p>
         </div>
     );
 }

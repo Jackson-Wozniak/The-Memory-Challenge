@@ -1,0 +1,28 @@
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+    --dark-background : #222222;
+    --light-backround : #666666;
+}
+
+.grid-memory-level-display {
+    margin-bottom: 20px;
+    font-family: monospace, sans-serif;
+    color : var(--light);
+    font-size: 1.5rem;
+    font-weight : bold;
+    text-shadow: 2px 2px var(--darkest);
+}
+
+.grid-memory-level-display h1 {
+    margin : 10px;
+}
+
+.grid-memory-level-display p {
+    margin : 0px;
+    color : crimson;
+}

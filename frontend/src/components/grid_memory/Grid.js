@@ -7,6 +7,7 @@ class Grid extends Component {
     super(props);
     this.state = {
       buttons: [...this.createArrayOfButtons(36)],
+      buttonsDisabled : false,
       correctGuessCount : 0,
       currentLevelIndexes : [],
       level : 1
@@ -18,6 +19,7 @@ class Grid extends Component {
   }
 
   startNewLevel(){
+
     //if past level 15, render 49 buttons
     this.setState({buttons : this.createArrayOfButtons(this.state.level <= 15 ? 36 : 49), correctGuessCount : 0}, function(){
         this.displayNewLevelButtons();
@@ -26,9 +28,9 @@ class Grid extends Component {
 
   incrementCorrectGuess(){
     this.setState({correctGuessCount : this.state.correctGuessCount + 1}, () => {
-        if(this.state.correctGuessCount >= this.state.currentLevelIndexes.length){
+        if(this.state.correctGuessCount >= 7){
             //when correct guesses reaches the # of buttons shown, start a new level
-            this.setState({level : this.state.level + 1}, function(){
+            this.setState({level : this.state.level + 1, buttonsDisabled : true}, function(){
                 this.props.updateLevel(this.state.level);
                 this.startNewLevel();
             });
@@ -40,7 +42,8 @@ class Grid extends Component {
     let tempArr = [];
     //set current indexes to empty array to avoid giving correct answers while loading
     this.setState({currentLevelIndexes : []});
-    for(let i = 0; i < 9; i++){
+    
+    for(let i = 0; i < 7; i++){
         let rand = Math.floor(Math.random() * 35);
         if(tempArr.includes(rand)){
             i--;
@@ -49,11 +52,13 @@ class Grid extends Component {
         tempArr.push(rand);
     }
     let newButtons = [...this.state.buttons];
+    //delay between rounds, to give user time to prepare for new round
     this.delay(1000).then(() => {
         this.activateButtonsOnLevelStart(tempArr, newButtons, true);
-        this.delay(1000).then(() => {
+        //1.5 second delay to keep buttons displayed before giving user the chance to click the shown buttons
+        this.delay(1500).then(() => {
             this.activateButtonsOnLevelStart(tempArr, newButtons, false);
-            this.setState({currentLevelIndexes : tempArr});
+            this.setState({currentLevelIndexes : tempArr, buttonsDisabled : false});
         });
     });
   }
@@ -84,13 +89,15 @@ class Grid extends Component {
   createArrayOfButtons(amountOfButtons){
     let buttonsArr = [];
     for(let i = 0; i < amountOfButtons; i++){
-        buttonsArr.push({correct : false, incorrect : false, includedInLevel : false});
+        buttonsArr.push({correct : false, incorrect : false, includedInLevel : false, disabled : false});
     }
     return buttonsArr;
   }
 
   handleGuess(index) {
+    console.log(index);
     let newButtons = [...this.state.buttons];
+    newButtons[index].disabled = true;
     if(this.state.currentLevelIndexes.includes(index)){
         newButtons[index].correct = true;
         newButtons[index].incorrect = false;
@@ -100,17 +107,18 @@ class Grid extends Component {
         newButtons[index].correct = false;
         this.props.incrementIncorrectGuesses();
     }
-    this.setState({ buttons: newButtons });
+    
+    this.setState({ buttons: newButtons});
   }
 
   render() {
     return (
-      <div>
+      <div className="grid-memory-grid">
         {this.state.buttons.map((button, index) => (
           <button
             key={index}
             onClick={() => this.handleGuess(index)}
-            disabled={button.disabled}
+            disabled={this.state.buttonsDisabled || button.disabled}
             className={button.includedInLevel ? 'flash-buttons' : button.correct ? 'correct' : button.incorrect ? 'incorrect' : ''}>
           </button>
         ))}

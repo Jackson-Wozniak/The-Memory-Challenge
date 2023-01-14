@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Grid from "./Grid";
 import GridScoreDisplay from "./GridScoreDisplay";
+import '../../styles/components/grid_memory/GridMemory.css'
 
 function GridMemory() {
     const [level, setLevel] = useState(1);
@@ -23,7 +24,7 @@ function GridMemory() {
     }
 
     return (  
-        <div>
+        <div className="grid-memory-container">
             <GridScoreDisplay level={level} incorrectGuesses={incorrectGuesses}/>
             <Grid updateLevel={updateLevel} incrementIncorrectGuesses={incrementIncorrectGuesses}/>
         </div>

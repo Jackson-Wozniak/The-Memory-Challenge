@@ -1,0 +1,21 @@
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--purple: #8B5CF6;
+	--light: #EEE;
+    --green: #3bd170;
+    --dark-background : #222222;
+    --light-backround : #666666;
+}
+
+.grid-memory-container {
+    width : 100vw;
+    height : 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--dark);
+}
