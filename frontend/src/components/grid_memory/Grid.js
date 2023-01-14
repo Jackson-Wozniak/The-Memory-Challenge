@@ -10,7 +10,8 @@ class Grid extends Component {
       buttonsDisabled : false,
       correctGuessCount : 0,
       currentLevelIndexes : [],
-      level : 1
+      level : 1,
+      buttonsShown : 7
     };
   }
 
@@ -18,17 +19,17 @@ class Grid extends Component {
     this.displayNewLevelButtons();
   }
 
+  //on each level start, render the updated buttons with default boolean field values
   startNewLevel(){
-
-    //if past level 15, render 49 buttons
-    this.setState({buttons : this.createArrayOfButtons(this.state.level <= 15 ? 36 : 49), correctGuessCount : 0}, function(){
+    //if past level 15, render 49 buttons, otherwise render 36
+    this.setState({buttons : this.createArrayOfButtons(this.state.level <= 15 ? 36 : 49), correctGuessCount : 0, buttonsShown : this.getCountOfButtonsShown()}, function(){
         this.displayNewLevelButtons();
     });
   }
 
   incrementCorrectGuess(){
     this.setState({correctGuessCount : this.state.correctGuessCount + 1}, () => {
-        if(this.state.correctGuessCount >= 7){
+        if(this.state.correctGuessCount >= this.state.buttonsShown){
             //when correct guesses reaches the # of buttons shown, start a new level
             this.setState({level : this.state.level + 1, buttonsDisabled : true}, function(){
                 this.props.updateLevel(this.state.level);
@@ -38,32 +39,35 @@ class Grid extends Component {
     });
   }
 
+  //from the buttonsShown state variable, find that many random numbers to flash on screen for 1.5 seconds
+  //these random numbers are the indexes of the buttons the user must click for a correct answer
   displayNewLevelButtons(){
-    let tempArr = [];
+    let indexesToLightUp = [];
     //set current indexes to empty array to avoid giving correct answers while loading
     this.setState({currentLevelIndexes : []});
-    
-    for(let i = 0; i < 7; i++){
+
+    for(let i = 0; i < this.state.buttonsShown; i++){
         let rand = Math.floor(Math.random() * 35);
-        if(tempArr.includes(rand)){
+        if(indexesToLightUp.includes(rand)){
             i--;
             continue;
         }
-        tempArr.push(rand);
+        indexesToLightUp.push(rand);
     }
     let newButtons = [...this.state.buttons];
     //delay between rounds, to give user time to prepare for new round
     this.delay(1000).then(() => {
-        this.activateButtonsOnLevelStart(tempArr, newButtons, true);
+        this.activateButtonsOnLevelStart(indexesToLightUp, newButtons, true);
         //1.5 second delay to keep buttons displayed before giving user the chance to click the shown buttons
         this.delay(1500).then(() => {
-            this.activateButtonsOnLevelStart(tempArr, newButtons, false);
-            this.setState({currentLevelIndexes : tempArr, buttonsDisabled : false});
+            this.activateButtonsOnLevelStart(indexesToLightUp, newButtons, false);
+            this.setState({currentLevelIndexes : indexesToLightUp, buttonsDisabled : false});
         });
     });
   }
 
-  getAmountOfButtonsShownByLevel(){
+  //as the levels increase, the buttons shown should scale up as well
+  getCountOfButtonsShown(){
     if(this.state.level <= 5){
         return 7;
     }else if(this.state.level <= 10){
@@ -75,8 +79,10 @@ class Grid extends Component {
     }
   }
 
-  activateButtonsOnLevelStart(tempArr, newButtons, activated){
-    tempArr.forEach(function(i){
+  //when new level starts, each number in the indexesToLightUp will light up the button matching that index
+  //actived boolean value will alter whether the color is default or lighten up
+  activateButtonsOnLevelStart(indexesToLightUp, newButtons, activated){
+    indexesToLightUp.forEach(function(i){
         newButtons[i].includedInLevel = activated;
     });
     this.setState({buttons : newButtons});
@@ -86,6 +92,8 @@ class Grid extends Component {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
+  //creates an array of default button objects to be used as comparisons for user guesses on the grid,
+  //these button objects also affect the class label (and therefore the appearance) of each button on the grid
   createArrayOfButtons(amountOfButtons){
     let buttonsArr = [];
     for(let i = 0; i < amountOfButtons; i++){
@@ -94,8 +102,10 @@ class Grid extends Component {
     return buttonsArr;
   }
 
+  //handler for button click event
+  //Checks if the index of the button is currently one of the buttons that lit up at the beginning of the level
+  //Update correct/incorrect guesses and all related actions
   handleGuess(index) {
-    console.log(index);
     let newButtons = [...this.state.buttons];
     newButtons[index].disabled = true;
     if(this.state.currentLevelIndexes.includes(index)){
