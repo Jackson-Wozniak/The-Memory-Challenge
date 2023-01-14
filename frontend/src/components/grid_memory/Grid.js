@@ -106,19 +106,18 @@ class Grid extends Component {
   //Checks if the index of the button is currently one of the buttons that lit up at the beginning of the level
   //Update correct/incorrect guesses and all related actions
   handleGuess(index) {
-    let newButtons = [...this.state.buttons];
-    newButtons[index].disabled = true;
+    let copiedButtonArr = [...this.state.buttons];
+    copiedButtonArr[index].disabled = true;
     if(this.state.currentLevelIndexes.includes(index)){
-        newButtons[index].correct = true;
-        newButtons[index].incorrect = false;
+        copiedButtonArr[index].correct = true;
+        copiedButtonArr[index].incorrect = false;
         this.incrementCorrectGuess();
     }else{
-        newButtons[index].incorrect = true;
-        newButtons[index].correct = false;
+        copiedButtonArr[index].incorrect = true;
+        copiedButtonArr[index].correct = false;
         this.props.incrementIncorrectGuesses();
     }
-    
-    this.setState({ buttons: newButtons});
+    this.setState({ buttons: copiedButtonArr});
   }
 
   render() {
