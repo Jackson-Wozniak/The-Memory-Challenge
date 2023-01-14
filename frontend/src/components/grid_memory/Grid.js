@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
 import '../../styles/components/grid_memory/Grid.css'
+import { callApiWithData } from '../../classes/ApiCall';
 
 class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttons: [...this.createArrayOfButtons()],
+      buttons: [...this.createArrayOfButtons(36)],
       correctGuessCount : 0,
-      currentLevelIndexes : []
+      currentLevelIndexes : [],
+      level : 1
     };
-  }
-
-  startNewLevel(){
-    this.setState({buttons : this.createArrayOfButtons(), correctGuessCount : 0}, function(){
-        this.displayNewLevelButtons();
-    });
   }
 
   componentDidMount(){
     this.displayNewLevelButtons();
   }
 
+  startNewLevel(){
+    //if past level 15, render 49 buttons
+    this.setState({buttons : this.createArrayOfButtons(this.state.level <= 15 ? 36 : 49), correctGuessCount : 0}, function(){
+        this.displayNewLevelButtons();
+    });
+  }
+
   incrementCorrectGuess(){
     this.setState({correctGuessCount : this.state.correctGuessCount + 1}, () => {
-        console.log(this.state.correctGuessCount);
-    if(this.state.correctGuessCount >= 2){
-        //when correct guesses reaches the # of buttons flashed, start a new level
-        this.props.generateNewLevel();
-        this.startNewLevel();
-        console.log('completed');
-    }
+        if(this.state.correctGuessCount >= this.state.currentLevelIndexes.length){
+            //when correct guesses reaches the # of buttons shown, start a new level
+            this.setState({level : this.state.level + 1}, function(){
+                this.props.updateLevel(this.state.level);
+                this.startNewLevel();
+            });
+        }
     });
   }
 
@@ -38,7 +41,7 @@ class Grid extends Component {
     //set current indexes to empty array to avoid giving correct answers while loading
     this.setState({currentLevelIndexes : []});
     for(let i = 0; i < 9; i++){
-        let rand = Math.floor(Math.random() * (35 + 1));
+        let rand = Math.floor(Math.random() * 35);
         if(tempArr.includes(rand)){
             i--;
             continue;
@@ -46,11 +49,25 @@ class Grid extends Component {
         tempArr.push(rand);
     }
     let newButtons = [...this.state.buttons];
-    this.activateButtonsOnLevelStart(tempArr, newButtons, true);
     this.delay(1000).then(() => {
-        this.activateButtonsOnLevelStart(tempArr, newButtons, false);
-        this.setState({currentLevelIndexes : tempArr});
+        this.activateButtonsOnLevelStart(tempArr, newButtons, true);
+        this.delay(1000).then(() => {
+            this.activateButtonsOnLevelStart(tempArr, newButtons, false);
+            this.setState({currentLevelIndexes : tempArr});
+        });
     });
+  }
+
+  getAmountOfButtonsShownByLevel(){
+    if(this.state.level <= 5){
+        return 7;
+    }else if(this.state.level <= 10){
+        return 12;
+    }else if(this.state.level <= 15){
+        return 15;
+    }else{
+        return 20;
+    }
   }
 
   activateButtonsOnLevelStart(tempArr, newButtons, activated){
@@ -64,9 +81,9 @@ class Grid extends Component {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-  createArrayOfButtons(){
+  createArrayOfButtons(amountOfButtons){
     let buttonsArr = [];
-    for(let i = 0; i < 36; i++){
+    for(let i = 0; i < amountOfButtons; i++){
         buttonsArr.push({correct : false, incorrect : false, includedInLevel : false});
     }
     return buttonsArr;
@@ -94,9 +111,7 @@ class Grid extends Component {
             key={index}
             onClick={() => this.handleGuess(index)}
             disabled={button.disabled}
-            className={button.includedInLevel ? 'flash-buttons' : button.correct ? 'correct' : button.incorrect ? 'incorrect' : ''}
-          >
-            {index}
+            className={button.includedInLevel ? 'flash-buttons' : button.correct ? 'correct' : button.incorrect ? 'incorrect' : ''}>
           </button>
         ))}
       </div>

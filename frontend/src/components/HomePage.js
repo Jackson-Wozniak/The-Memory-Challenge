@@ -7,7 +7,7 @@ function HomePage() {
     return ( 
         <div className="home-page">
             {games.map(game => (
-                <GameCard description={game.description} name={game.name} path={game.path}/>
+                <GameCard key={game.name} description={game.description} name={game.name} path={game.path}/>
             ))}
         </div>
     );

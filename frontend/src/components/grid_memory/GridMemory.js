@@ -14,8 +14,8 @@ function GridMemory() {
         }
     }, [incorrectGuesses]);
 
-    function generateNewLevel(){
-        setLevel(level + 1);
+    function updateLevel(level){
+        setLevel(level);
     }
 
     function incrementIncorrectGuesses(){
@@ -25,7 +25,7 @@ function GridMemory() {
     return (  
         <div>
             <GridScoreDisplay level={level} incorrectGuesses={incorrectGuesses}/>
-            <Grid generateNewLevel={generateNewLevel} incrementIncorrectGuesses={incrementIncorrectGuesses}/>
+            <Grid updateLevel={updateLevel} incrementIncorrectGuesses={incrementIncorrectGuesses}/>
         </div>
     );
 }
