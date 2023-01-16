@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../styles/components/grid_memory/Grid.css'
-import { callApiWithData } from '../../classes/ApiCall';
 
 class Grid extends Component {
   constructor(props) {

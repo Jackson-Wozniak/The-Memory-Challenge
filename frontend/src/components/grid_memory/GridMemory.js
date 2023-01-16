@@ -3,17 +3,17 @@ import Grid from "./Grid";
 import GridScoreDisplay from "./GridScoreDisplay";
 import '../../styles/components/grid_memory/GridMemory.css'
 import SelfAssessment from "../SelfAssessment";
+import ShowResults from "../ShowResults";
 
 function GridMemory() {
     const [level, setLevel] = useState(1);
     const [incorrectGuesses, setIncorrectGuesses] = useState(0);
     const [grade, setGrade] = useState(null);
-    const [gameStarted, setGameStarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
 
     useEffect(() => {
         if(incorrectGuesses >= 1){
-            console.log("Game Over");
+            setGameOver(true);
         }
     }, [incorrectGuesses]);
 
@@ -37,6 +37,10 @@ function GridMemory() {
                     <GridScoreDisplay level={level} incorrectGuesses={incorrectGuesses}/>
                     <Grid updateLevel={updateLevel} incrementIncorrectGuesses={incrementIncorrectGuesses}/>
                  </div>
+    }
+
+    if(gameOver){
+        window = <ShowResults name="grid-memory" score={level} grade={grade}/>
     }
 
     return (  
